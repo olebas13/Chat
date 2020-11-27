@@ -1,6 +1,7 @@
-package org.olebas.chat
+package org.olebas.chat.ui.login
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -8,7 +9,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
-import org.olebas.chat.ui.login.LoginView
+import org.olebas.chat.R
+import org.olebas.chat.data.local.AppPreferences
+import org.olebas.chat.ui.main.MainActivity
+import org.olebas.chat.ui.signup.SignUpActivity
 
 class LoginActivity : AppCompatActivity(), LoginView, View.OnClickListener {
 
@@ -17,6 +21,8 @@ class LoginActivity : AppCompatActivity(), LoginView, View.OnClickListener {
     private lateinit var btnLogin: Button
     private lateinit var btnSignUp: Button
     private lateinit var progressBar: ProgressBar
+    private lateinit var presenter: LoginPresenter
+    private lateinit var preferences: AppPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +45,12 @@ class LoginActivity : AppCompatActivity(), LoginView, View.OnClickListener {
             Toast.LENGTH_LONG).show()
     }
 
-    override fun onClick(v: View?) {
-
+    override fun onClick(view: View) {
+        if (view.id == R.id.btn_login) {
+            presenter.executeLogin(etUsername.text.toString(), etPassword.text.toString())
+        } else if (view.id == R.id.btn_sign_up) {
+            navigateToSignUp()
+        }
     }
 
     override fun getContext(): Context {
@@ -64,10 +74,11 @@ class LoginActivity : AppCompatActivity(), LoginView, View.OnClickListener {
     }
 
     override fun navigateToSignUp() {
-
+        startActivity(Intent(this, SignUpActivity::class.java))
     }
 
     override fun navigateToHome() {
-
+        finish()
+        startActivity(Intent(this, MainActivity::class.java))
     }
 }

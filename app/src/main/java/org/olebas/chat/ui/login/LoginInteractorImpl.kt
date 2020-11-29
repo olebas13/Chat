@@ -35,7 +35,7 @@ class LoginInteractorImpl : LoginInteractor {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ res ->
                         if (res.code() != 403) {
-                            accessToken = res.headers()["Authorisation"] as String
+                            accessToken = res.headers()["Authorization"] as String
                             listener.onAuthSuccess()
                         } else {
                             listener.onAuthError()

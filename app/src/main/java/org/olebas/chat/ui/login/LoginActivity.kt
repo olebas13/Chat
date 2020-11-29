@@ -27,6 +27,15 @@ class LoginActivity : AppCompatActivity(), LoginView, View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        presenter = LoginPresenterImpl(this)
+        preferences = AppPreferences.create(this)
+
+        if (preferences.accessToken != null) {
+            navigateToHome()
+            finish()
+        }
+
+        bindViews()
     }
 
     override fun bindViews() {

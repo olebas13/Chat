@@ -23,29 +23,29 @@ interface MessengerApiService {
     fun createUser(@Body user: UserRequestObject): Observable<UserVO>
 
     @GET("users")
-    fun listUsers(@Header("Authorisation") authorisation: String): Observable<UserListVO>
+    fun listUsers(@Header("Authorization") authorisation: String): Observable<UserListVO>
 
     @PUT("users")
     fun updateUserStatus(@Body request: StatusUpdateRequestObject,
-                         @Header("Authorisation") authorisation: String): Observable<UserVO>
+                         @Header("Authorization") authorisation: String): Observable<UserVO>
 
     @GET("users/{userId}")
     fun showUser(@Path("userId") userId: Long,
-                 @Header("Authorisation") authorisation: String): Observable<UserVO>
+                 @Header("Authorization") authorisation: String): Observable<UserVO>
 
     @GET("users/details")
-    fun echoDetails(@Header("Authorisation") authorisation: String): Observable<UserVO>
+    fun echoDetails(@Header("Authorization") authorisation: String): Observable<UserVO>
 
     @POST("messages")
     fun createMessage(@Body messageRequestObject: MessageRequestObject,
-                      @Header("Authorisation") authorisation: String): Observable<MessageVO>
+                      @Header("Authorization") authorisation: String): Observable<MessageVO>
 
     @GET("conversations")
-    fun listConversations(@Header("Authorisation") authorisation: String): Observable<ConversationListVO>
+    fun listConversations(@Header("Authorization") authorisation: String): Observable<ConversationListVO>
 
     @GET("conversations/{conversationId}")
     fun showConversation(@Path("conversationId") conversationId: Long,
-                         @Header("Authorisation") authorisation: String): Observable<ConversationVO>
+                         @Header("Authorization") authorisation: String): Observable<ConversationVO>
 
     companion object Factory {
         private var service: MessengerApiService? = null
